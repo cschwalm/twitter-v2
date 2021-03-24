@@ -37,7 +37,7 @@ class TwitterStream {
   // When streaming Tweets, the goal is to stay connected for as long as
   // possible, recognizing that disconnects may occur. In Labs, the streaming
   // endpoint does not include a way to recover Tweets that were missed while
-  // disconnected. Instead, the endpoint provides a 20-second keep alive
+  // disconnected. Instead, the endpoint provides a 30-second keep alive
   // heartbeat (it will look like a new line character). Use this signal to
   // detect if you’re being disconnected.
   _refreshTimeout() {
@@ -45,7 +45,7 @@ class TwitterStream {
       clearTimeout(this._timeout);
       this._timeout = setTimeout(() => {
         this._closeWithError(new TwitterError('Stream unresponsive'));
-      }, 20000);
+      }, 30000);
     }
   }
 
